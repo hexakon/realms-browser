@@ -46,3 +46,7 @@
 * { /* all text has shadow by default */
     text-shadow: 0.125em 0.125em 0px color-mix(in srgb, currentColor 25%, black);
 }
+
+body {
+    @apply bg-stone-900
+}
