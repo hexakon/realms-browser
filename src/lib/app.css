@@ -48,8 +48,21 @@
 }
 
 body {
-    @apply bg-stone-900
+    @apply bg-stone-800
 }
 html {
     @apply  scroll-smooth
+}
+.bg-stone {
+    background-image: linear-gradient(
+			to left,
+			#000,
+			#000c 10%,
+			#000c 90%,
+			#000
+    ),
+    url("$lib/stone.png");
+    background-repeat: repeat;
+    background-size: initial;
+    background-attachment: fixed;
 }

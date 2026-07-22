@@ -1,8 +1,8 @@
 <script lang="ts">
-    let { id, name, version, author, link, image, trailer, recommendedPlayers } = $props();
+    let { id, name, version, author, link, image, trailer, recommendedPlayers, show_id } = $props();
 </script>
 
-<div class="flex flex-col gap-4 bg-stone-800 p-4 text-white">
+<div class="flex flex-col gap-4 bg-stone-900 p-4 text-white">
     <div class="flex flex-row">
         <img src={`data:image/png;base64,${image}`} alt="icon" width=160 height=160 class="drop-shadow-lg mr-4 w-24 h-24">
         <div class="flex flex-col justify-between min-w-0 wrap-break-word">
@@ -28,7 +28,7 @@
         {/if}
         <div class="flex flex-1 justify-center items-center p-1 text-gray">
             {version}
-            <span class="ml-2 text-darkgray text-xs">#{id}</span>
+            {#if show_id}<span class="ml-2 text-darkgray text-xs">#{id}</span>{/if}
         </div>
     </div>
 </div>
