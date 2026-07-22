@@ -4,7 +4,7 @@
 
 <div class="flex flex-col gap-4 bg-stone-800 p-4 text-white">
     <div class="flex flex-row">
-        <img src={`data:image/png;base64,${image}`} alt="icon" width=160 height=160 class="drop-shadow-lg pr-4 w-26 h-24">
+        <img src={`data:image/png;base64,${image}`} alt="icon" width=160 height=160 class="drop-shadow-lg mr-4 w-24 h-24">
         <div class="flex flex-col justify-between min-w-0 wrap-break-word">
             <p class="text-white">{name}</p>
             <p class="text-gray text-sm">{author}</p>
