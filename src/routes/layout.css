@@ -27,4 +27,22 @@
 
 @theme {
     --font-sans: Mojangles, sans-serif;
+    --color-darkblue: #00a;
+    --color-darkgreen: #0a0;
+    --color-darkaqua: #0aa;
+    --color-darkred: #a00;
+    --color-darkpurple: #a0a;
+    --color-gold: #fa0;
+    --color-gray: #aaa;
+    --color-darkgray: #555;
+    --color-blue: #55f;
+    --color-green: #5f5;
+    --color-aqua: #5ff;
+    --color-red: #f55;
+    --color-lightpurple: #f5f;
+    --color-yellow: #ff5;
+}
+
+* { /* all text has shadow by default */
+    text-shadow: 0.125em 0.125em 0px color-mix(in srgb, currentColor 25%, black);
 }
