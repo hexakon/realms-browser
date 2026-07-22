@@ -5,10 +5,10 @@
 <div class="flex flex-col gap-4 bg-stone-800 p-4 text-white">
     <div class="flex flex-row">
         <img src={`data:image/png;base64,${image}`} alt="icon" width=160 height=160 class="drop-shadow-lg pr-4 w-26 h-24">
-        <div class="flex flex-col justify-between wrap-break-word">
+        <div class="flex flex-col justify-between min-w-0 wrap-break-word">
             <p class="text-white">{name}</p>
-            <p class="text-gray">{author}</p>
-            <p class="text-darkgray">{recommendedPlayers}</p>
+            <p class="text-gray text-sm">{author}</p>
+            <p class="text-darkgray text-sm">{recommendedPlayers}</p>
         </div>
     </div>
     <div class="flex gap-2">
@@ -28,6 +28,7 @@
         {/if}
         <div class="flex flex-1 justify-center items-center p-1 text-gray">
             {version}
+            <span class="ml-2 text-darkgray text-xs">#{id}</span>
         </div>
     </div>
 </div>
