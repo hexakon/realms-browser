@@ -127,7 +127,7 @@
 {/if}
 
 <div class="flex flex-col items-center gap-2 my-10 text-gray text-sm">
-	<span>Site updates every weekday 15:00 UTC</span>
+	<span>Site updates every weekday <i>approximately</i> 15:00 UTC</span>
 	<span>Powered by <a href="https://realmshub.com/" target="_blank" class="text-blue decoration-2 underline underline-offset-2">RealmsHub</a> API, created by <a href="https://plagiatus.net" target="_blank" class="text-blue decoration-2 underline underline-offset-2">Plagiatus</a></span>
 	<span>Website by <a href="https://hexakon.net" target="_blank" class="text-blue decoration-2 underline underline-offset-2">hexakon</a></span>
 </div>
