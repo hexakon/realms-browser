@@ -1,6 +1,6 @@
 <script lang="ts">
     import Map from '$lib/Map.svelte';
-    let {title='', maplist, sorting_mode, show_id, categorize=true, sum=[]} = $props();
+    let {title='', maplist, sorting_mode, show_id, categorize=true} = $props();
 
     let sorted_list = $derived.by(() => {
         switch (sorting_mode) {
@@ -20,17 +20,17 @@
         <div id={title.replaceAll(" ","-")} class="-top-24 left-0 absolute"></div>
         {#if categorize}
             <h1 class="mb-2 font-bold text-2xl md:text-5xl">{title.toUpperCase()}</h1>
-            <p><span class="text-lightpurple">{maplist.length}</span> maps available</p>
-        {:else}
-            <p class="mb-2">
-                <span class="text-lightpurple">{maplist.length}</span> total maps available on Realms right now:
-            </p>
             <p>
-                <span class="text-red">{sum[0]}</span> minigames,
-                <span class="text-blue">{sum[1]}</span> adventures,
-                <span class="text-green">{sum[2]}</span> experiences,
-                <span class="text-darkaqua">{sum[3]}</span> world templates, and
-                <span class="text-gold">{sum[4]}</span> inspirations
+                <span
+                    class:text-red={title==='minigames'}
+                    class:text-blue={title==='adventures'}
+                    class:text-green={title==='experiences'}
+                    class:text-darkaqua={title==='world templates'}
+                    class:text-gold={title==='inspiration'}
+                >
+                    {maplist.length}
+                </span>
+                maps available
             </p>
         {/if}
     </div>

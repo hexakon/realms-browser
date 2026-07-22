@@ -1,6 +1,5 @@
 <script lang="ts">
     import MapList from '$lib/MapList.svelte';
-	import { onMount } from 'svelte';
 
 	import minigame from '$lib/api/minigame.json'
 	import adventure from '$lib/api/adventure.json'
@@ -30,7 +29,14 @@
 	const sections = ['minigames', 'adventures', 'experiences', 'world-templates', 'inspiration'];
 	let active = $state('minigames');
 
-	onMount(() => {
+	$effect(() => {
+		categorize; // re-observe when sections remount after categorize toggles
+
+		if (!categorize) {
+			active = '';
+			return;
+		}
+
 		// set of all elements that are visible
 		const visible = new Set();
 
@@ -58,12 +64,12 @@
 <header class="top-0 left-0 z-2 sticky flex flex-col">
 	<nav class="flex md:justify-center items-stretch bg-orange-900 w-full overflow-x-scroll text-white text-sm md:text-base text-center">
 
-		<button class="flex items-center hover:bg-orange-600 px-4 py-2 transition-colors cursor-pointer" onclick={() => show_header_options = !show_header_options}>
-			≡
+		<button class="flex items-center hover:bg-orange-700 px-4 py-2 transition-colors cursor-pointer" class:bg-orange-950={show_header_options} onclick={() => show_header_options = !show_header_options}>
+			{!show_header_options ? '≡' : '↓'}
 		</button>
 
 		{#each sections as id}
-			<a class="flex items-center hover:bg-orange-700 px-4 py-2 transition-colors" class:bg-orange-600={active === id} href="#{id}">
+			<a class="flex items-center px-4 py-2 decoration-2 -underline-offset-8 transition-colors" class:hover:bg-orange-700={categorize} class:bg-orange-600={active === id && categorize} class:line-through={!categorize} href="#{id}">
 				{id.toUpperCase().replace('-', ' ')}
 			</a>
 		{/each}
@@ -97,6 +103,19 @@
 	</div>
 </header>
 
+<div class="flex flex-col justify-center items-center gap-2 my-8 text-white">
+	<p class="mb-2">
+		<span class="text-lightpurple">{minigame.total+adventure.total+experience.total+worldtemp.total+inspiration.total}</span> total maps available on Realms right now:
+	</p>
+	<p>
+		<span class="text-red">{minigame.total}</span> minigames,
+		<span class="text-blue">{adventure.total}</span> adventures,
+		<span class="text-green">{experience.total}</span> experiences,
+		<span class="text-darkaqua">{worldtemp.total}</span> world templates, and
+		<span class="text-gold">{inspiration.total}</span> inspirations
+	</p>
+</div>
+
 {#if categorize}
 	<MapList {sorting_mode} {show_id} title="minigames" maplist={minigame.templates} />
 	<MapList {sorting_mode} {show_id} title="adventures" maplist={adventure.templates} />
@@ -104,7 +123,7 @@
 	<MapList {sorting_mode} {show_id} title="world templates" maplist={worldtemp.templates} />
 	<MapList {sorting_mode} {show_id} title="inspiration" maplist={inspiration.templates} />
 {:else}
-	<MapList {sorting_mode} {show_id} categorize={false} maplist={[...minigame.templates, ...adventure.templates, ...experience.templates, ...worldtemp.templates, ...inspiration.templates]} sum={[minigame.total, adventure.total, experience.total, worldtemp.total, inspiration.total]} />
+	<MapList {sorting_mode} {show_id} categorize={false} maplist={[...minigame.templates, ...adventure.templates, ...experience.templates, ...worldtemp.templates, ...inspiration.templates]} />
 {/if}
 
 <div class="flex flex-col items-center gap-2 my-10 text-gray text-sm">
