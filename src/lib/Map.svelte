@@ -1,12 +1,32 @@
 <script lang="ts">
-    let { id, name, version, author, link, image, trailer, recommendedPlayers, show_id } = $props();
+    const MAPPING = {
+        MINIGAME: 'minigame',
+        ADVENTUREMAP: 'adventure',
+        EXPERIENCE: 'experience',
+        WORLD_TEMPLATE: 'world template',
+        INSPIRATION: 'inspiration'
+    }
+    let { id, name, type, version, author, link, image, trailer, recommendedPlayers, show_id, categorize=true } = $props();
 </script>
 
-<div class="flex flex-col gap-4 bg-stone-900 p-4 text-white">
-    <div class="flex flex-row">
+
+<div class="relative flex flex-col bg-stone-900 p-4 text-white">
+    {#if !categorize}
+        <span class="top-0.5 left-1 absolute text-[.5rem]"
+            class:text-red={type==='MINIGAME'}
+            class:text-blue={type==='ADVENTUREMAP'}
+            class:text-green={type==='EXPERIENCE'}
+            class:text-darkaqua={type==='WORLD_TEMPLATE'}
+            class:text-gold={type==='INSPIRATION'}
+        >{MAPPING[type]}
+        </span><br>
+    {/if}
+    <div class="flex flex-row mb-4">
         <img src={`data:image/png;base64,${image}`} alt="icon" width=160 height=160 class="drop-shadow-lg mr-4 w-24 h-24">
         <div class="flex flex-col justify-between min-w-0 wrap-break-word">
-            <p class="text-white">{name}</p>
+            <p class="text-white">
+                {name}
+            </p>
             <p class="text-gray text-sm">{author}</p>
             <p class="text-darkgray text-sm">{recommendedPlayers}</p>
         </div>
