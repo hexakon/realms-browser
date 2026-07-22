@@ -1,0 +1,28 @@
+name: Pull from RealmsHub API
+on:
+  schedule:
+    # 16:00 UTC = 5 PM CET or 6 PM CEST. mojang gets off work 5 PM so there's no way this misses any changes
+    - cron: '0 16 * * 1-5'
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch data
+        run: |
+            curl -sf "https://api.realmshub.com/templates/INSPIRATION/0/250" -o src/lib/api/inspiration.json
+            curl -sf "https://api.realmshub.com/templates/ADVENTUREMAP/0/250" -o src/lib/api/adventure.json
+            curl -sf "https://api.realmshub.com/templates/MINIGAME/0/250" -o src/lib/api/minigame.json
+            curl -sf "https://api.realmshub.com/templates/NORMAL/0/250" -o src/lib/api/worldtemp.json
+            curl -sf "https://api.realmshub.com/templates/EXPERIENCE/0/250" -o src/lib/api/experience.json
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add src/lib/api/
+          git diff --staged --quiet || git commit -m "Update data"
+          git push
