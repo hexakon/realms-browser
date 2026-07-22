@@ -3,6 +3,8 @@ on:
   schedule:
     # 16:00 UTC = 5 PM CET or 6 PM CEST. mojang gets off work 5 PM so there's no way this misses any changes
     - cron: '0 16 * * 1-5'
+    # temp schedule to test if the cron job runs as expected
+    - cron: '12 23 * * *'
 
 permissions:
   contents: write
