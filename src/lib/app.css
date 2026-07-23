@@ -24,9 +24,22 @@
     font-weight: bold;
     font-style: italic;
 }
+@font-face {
+    font-family: 'Five';
+    src: url('$lib/font/MinecraftFive-Regular.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Five';
+    src: url('$lib/font/MinecraftFive-Bold.ttf');
+    font-weight: bold;
+    font-style: normal;
+}
 
 @theme {
     --font-sans: Mojangles, sans-serif;
+    --font-five: Five, sans-serif;
     --color-darkblue: #00a;
     --color-darkgreen: #0a0;
     --color-darkaqua: #0aa;

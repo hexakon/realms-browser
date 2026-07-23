@@ -86,8 +86,8 @@
 						<option value="update_desc">latest updated first</option>
 						<option value="update_asc">latest updated last</option>
 					{/if}
-					<option value="publish_desc">latest published first</option>
-					<option value="publish_asc">latest published last</option>
+					<option value="publish_desc">newest published first</option>
+					<option value="publish_asc">newest published last</option>
 				</select>
 			</span>
 			<button type="button" class="md:mr-4 hover:text-orange-100 transition-colors cursor-pointer" onclick={() => show_id = !show_id} aria-pressed={show_id}>

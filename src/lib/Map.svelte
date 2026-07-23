@@ -12,7 +12,7 @@
 
 <div class="relative flex flex-col bg-stone-900 p-4 text-white">
     {#if !categorize}
-        <span class="top-0.5 left-1 absolute text-[.5rem]"
+        <span class="top-0.5 left-1 absolute font-five text-[.5rem]"
             class:text-red={type==='MINIGAME'}
             class:text-blue={type==='ADVENTUREMAP'}
             class:text-green={type==='EXPERIENCE'}
@@ -48,7 +48,7 @@
         {/if}
         <div class="flex flex-1 justify-center items-center p-1 text-gray">
             {version}
-            {#if show_id}<span class="ml-2 text-darkgray text-xs">#{id}</span>{/if}
+            {#if show_id}<span class="ml-2 font-five text-darkgray text-xs">#{id}</span>{/if}
         </div>
     </div>
 </div>
