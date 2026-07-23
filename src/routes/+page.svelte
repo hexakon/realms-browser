@@ -6,8 +6,9 @@
 	import experience from '$lib/api/experience.json'
 	import worldtemp from '$lib/api/worldtemp.json'
 	import inspiration from '$lib/api/inspiration.json'
-    import { fly, slide } from 'svelte/transition';
 
+	// total amount of maps
+	let total_maps_count = minigame.total + adventure.total + experience.total + worldtemp.total + inspiration.total
 	// toggle header dropdown
 	let show_header_options = $state(false);
 	// sorting mode
@@ -25,7 +26,6 @@
 	})
 	// icons only
 	let icons_only = $state(false);
-
 
 	// navbar highlight
 	const sections = ['minigames', 'adventures', 'experiences', 'world-templates', 'inspiration'];
@@ -62,6 +62,18 @@
 		return () => observer.disconnect();
 	});
 </script>
+
+<svelte:head>
+	<title>Realms Library Browser</title>
+	<meta name="theme-color" content="#c2410c">
+	<meta name="description" content={`There are ${total_maps_count} maps available on Realms right now!`}>
+	<meta name="author" content="hexakon">
+	<meta property="og:description" content={`There are ${total_maps_count} maps available on Realms right now!`}>
+	<meta property="og:title" content="Realms Library Browser">
+	<meta property="og:type" content="website">
+	<meta property="og:site_name" content="hexakon.net">
+</svelte:head>
+
 
 <header class="top-0 left-0 z-2 sticky flex flex-col">
 	<nav class="flex md:justify-center items-stretch bg-orange-900 w-full overflow-x-scroll text-white text-sm md:text-base text-center">
@@ -110,7 +122,7 @@
 
 <div class="flex flex-col justify-center items-center gap-2 my-8 px-2 text-white text-center">
 	<p class="mb-2">
-		<span class="text-lightpurple">{minigame.total+adventure.total+experience.total+worldtemp.total+inspiration.total}</span> total maps available on Realms right now:
+		<span class="text-lightpurple">{total_maps_count}</span> total maps available on Realms right now:
 	</p>
 	<p>
 		<span class="text-red">{minigame.total}</span> minigames,
