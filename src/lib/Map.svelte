@@ -46,9 +46,9 @@
         {:else}
             <div class="flex flex-1 justify-center items-center"></div>
         {/if}
-        <div class="flex flex-1 justify-center items-center p-1 text-gray">
+        <div class="flex flex-col flex-1 justify-center items-center p-1 text-gray">
             {version}
-            {#if show_id}<span class="ml-2 font-five text-darkgray text-xs">#{id}</span>{/if}
+            {#if show_id}<span class="-m-1 font-five text-darkgray text-xs">#{id}</span>{/if}
         </div>
     </div>
 </div>
