@@ -23,6 +23,8 @@
 			if (sorting_mode === 'update_asc') sorting_mode = 'publish_asc';
 		}
 	})
+	// icons only
+	let icons_only = $state(false);
 
 
 	// navbar highlight
@@ -76,7 +78,7 @@
 
 	</nav>
 	<div class:h-0={!show_header_options} class:p-0={!show_header_options} class:p-2={show_header_options} class="bg-orange-950 w-full overflow-hidden">
-		<div class="flex md:flex-row flex-col justify-center items-center gap-2 text-white text-sm md:text-base">
+		<div class="flex md:flex-row flex-col flex-wrap justify-center items-center gap-2 text-white text-sm md:text-base">
 			<span class="md:mr-4">
 				Sort by 
 				<select bind:value={sorting_mode} class="bg-[#1a1a17] mx-auto p-2 border border-black rounded-md text-yellow">
@@ -94,16 +96,19 @@
 			<button type="button" class="md:mr-4 hover:text-orange-100 transition-colors cursor-pointer" onclick={() => categorize = !categorize} aria-pressed={categorize}>
 				Categorize: {categorize ? '☑' : '☐'}
 			</button>
+			<button type="button" class="md:mr-4 hover:text-orange-100 transition-colors cursor-pointer" onclick={() => icons_only = !icons_only} aria-pressed={icons_only}>
+				Icons only: {icons_only ? '☑' : '☐'}
+			</button>
 		</div>
 		{#if !categorize}
 		<div class="mt-2 text-gray text-xs text-center">
-			Unfortunately Mojang's API doesn't contain update date, so I can't compare them across categories
+			Unfortunately Mojang's API doesn't include update timestamps, so I can't compare update order across categories
 		</div>
 		{/if}
 	</div>
 </header>
 
-<div class="flex flex-col justify-center items-center gap-2 my-8 text-white">
+<div class="flex flex-col justify-center items-center gap-2 my-8 px-2 text-white text-center">
 	<p class="mb-2">
 		<span class="text-lightpurple">{minigame.total+adventure.total+experience.total+worldtemp.total+inspiration.total}</span> total maps available on Realms right now:
 	</p>
@@ -117,13 +122,13 @@
 </div>
 
 {#if categorize}
-	<MapList {sorting_mode} {show_id} title="minigames" maplist={minigame.templates} />
-	<MapList {sorting_mode} {show_id} title="adventures" maplist={adventure.templates} />
-	<MapList {sorting_mode} {show_id} title="experiences" maplist={experience.templates} />
-	<MapList {sorting_mode} {show_id} title="world templates" maplist={worldtemp.templates} />
-	<MapList {sorting_mode} {show_id} title="inspiration" maplist={inspiration.templates} />
+	<MapList {sorting_mode} {show_id} {icons_only} title="minigames" maplist={minigame.templates} />
+	<MapList {sorting_mode} {show_id} {icons_only} title="adventures" maplist={adventure.templates} />
+	<MapList {sorting_mode} {show_id} {icons_only} title="experiences" maplist={experience.templates} />
+	<MapList {sorting_mode} {show_id} {icons_only} title="world templates" maplist={worldtemp.templates} />
+	<MapList {sorting_mode} {show_id} {icons_only} title="inspiration" maplist={inspiration.templates} />
 {:else}
-	<MapList {sorting_mode} {show_id} categorize={false} maplist={[...minigame.templates, ...adventure.templates, ...experience.templates, ...worldtemp.templates, ...inspiration.templates]} />
+	<MapList {sorting_mode} {show_id} {icons_only} categorize={false} maplist={[...minigame.templates, ...adventure.templates, ...experience.templates, ...worldtemp.templates, ...inspiration.templates]} />
 {/if}
 
 <div class="flex flex-col items-center gap-2 my-10 text-gray text-sm">

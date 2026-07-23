@@ -1,6 +1,7 @@
 <script lang="ts">
     import Map from '$lib/Map.svelte';
-    let {title='', maplist, sorting_mode, show_id, categorize=true} = $props();
+    import MapIcon from './MapIcon.svelte';
+    let {title='', maplist, sorting_mode, show_id, categorize=true, icons_only} = $props();
 
     let sorted_list = $derived.by(() => {
         switch (sorting_mode) {
@@ -35,9 +36,22 @@
         {/if}
     </div>
 
-<div class="relative gap-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-auto px-2 w-full max-w-300">
-    <div id={title.replaceAll(" ","-")+"_observer"} class="top-[50vh] right-0 bottom-0 left-0 -z-1 absolute"></div>
-    {#each sorted_list as map}
-        <Map {...map} {show_id} {categorize} />
-    {/each}
-</div>
+    <div class="relative grid mx-auto px-2 w-full max-w-300"
+        class:gap-3={!icons_only}
+        class:grid-cols-1={!icons_only}
+        class:md:grid-cols-2={!icons_only}
+        class:lg:grid-cols-3={!icons_only}
+        class:gap-2={icons_only}
+        class:grid-cols-3={icons_only}
+        class:md:grid-cols-5={icons_only}
+        class:lg:grid-cols-9={icons_only}
+    >
+        <div id={title.replaceAll(" ","-")+"_observer"} class="top-[50vh] right-0 bottom-0 left-0 -z-1 absolute"></div>
+        {#each sorted_list as map}
+            {#if !icons_only}
+                <Map {...map} {show_id} {categorize} />
+            {:else}
+                <MapIcon {map} {show_id} {categorize} />
+            {/if}
+        {/each}
+    </div>
