@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 jobs:
   refresh:
@@ -25,5 +26,9 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add src/lib/api/
-          git diff --staged --quiet || git commit -m "Update data"
+          git diff --staged --quiet && exit 0
+          git commit -m "Update data"
           git push
+          gh workflow run deploy.yml
+        env:
+          GH_TOKEN: ${{ github.token }}
